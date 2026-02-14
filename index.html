@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestra Realidad ❤️</title>
+<title>Por Qué Me Enamoré De Ti ❤️</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body{
 margin:0;
-background:#0a0715;
+background:#090612;
 color:white;
 font-family:'Poppins',sans-serif;
 overflow:hidden;
@@ -34,19 +34,25 @@ button{
 padding:12px 20px;
 border:none;
 border-radius:30px;
-background:#ff4081;
+background:#ff5c93;
 color:white;
 margin:10px;
 cursor:pointer;
 }
 
 .photo{
-width:230px;
+width:240px;
 border-radius:15px;
-margin:10px;
+margin:15px;
+box-shadow:0 0 20px rgba(255,92,147,0.5);
 }
 
-#noBtn{position:absolute;}
+.reason{
+max-width:400px;
+margin:10px auto;
+font-size:18px;
+line-height:1.5;
+}
 
 .heart{
 position:fixed;
@@ -67,168 +73,100 @@ font-size:20px;
 <audio id="music" loop></audio>
 
 <div id="loader" class="screen active">
-<h1>Cargando nuestra realidad… ❤️</h1>
+<h1>Recordando por qué me enamoré… ❤️</h1>
 <p id="loadText"></p>
 </div>
 
-<div id="main" class="screen">
+<div id="home" class="screen">
 <h1 id="title"></h1>
-<button onclick="next('cap1')">Entrar</button>
+<button onclick="go('r1')">Descubrir ❤️</button>
 </div>
 
-<div id="cap1" class="screen">
-<h2>Capítulo 1 ❤️ El inicio</h2>
-<p>Todo comenzó como algo pequeño…</p>
-<button onclick="nextCap(2)">Continuar</button>
+<div id="r1" class="screen">
+<h2>💫 Tu forma de ser</h2>
+<p class="reason">Me enamoré de tu esencia… de cómo haces que todo se sienta ligero y real.</p>
+<button onclick="go('r2')">Siguiente</button>
 </div>
 
-<div id="cap2" class="screen">
-<h2>Capítulo 2 ✨ Nuestra conexión</h2>
-<p>Cada día creció más…</p>
+<div id="r2" class="screen">
+<h2>✨ Tu sonrisa</h2>
 <img id="photo" class="photo">
-<button onclick="nextCap(3)">Continuar</button>
+<p class="reason">Porque tu sonrisa tiene ese poder raro… el de arreglar mis días sin decir nada.</p>
+<button onclick="go('r3')">Siguiente</button>
 </div>
 
-<div id="cap3" class="screen">
-<h2>Capítulo 3 🌙 Recuerdos vivos</h2>
-<p>Y floreció día tras día</p>
-<canvas id="tree" width="300" height="350"></canvas>
-<button onclick="nextCap(4)">Continuar</button>
+<div id="r3" class="screen">
+<h2>🌙 Cómo me haces sentir</h2>
+<p class="reason">Contigo entendí que la calma también puede latir fuerte… y que el amor se construye en detalles pequeños.</p>
+<button onclick="go('r4')">Siguiente</button>
 </div>
 
-<div id="cap4" class="screen">
-<h2>Capítulo 4 💫 Futuro juntos</h2>
-<p>Hasta convertirse en nuestra realidad.</p>
-<button onclick="next('proposal')">Continuar</button>
+<div id="r4" class="screen">
+<h2>🔥 Todo lo que eres</h2>
+<p class="reason">Me enamoré de tu risa, de tu mirada, de tu forma de abrazar… pero sobre todo, de quién soy cuando estoy contigo.</p>
+<button onclick="go('final')">Continuar</button>
 </div>
 
-<div id="proposal" class="screen">
-<h1>¿Seguimos escribiendo esta realidad juntos? 💍</h1>
-<button onclick="yes()">Sí ❤️</button>
-<button id="noBtn" onmouseover="escapeNo()">No 😅</button>
+<div id="final" class="screen">
+<h1>Y sigo enamorándome de ti cada día ❤️</h1>
+<button onclick="celebrate()">Siempre tú 💖</button>
 </div>
 
 <script>
 
 /* PERSONALIZA */
-const NOMBRE_DESTINATARIO="Mi Amor ❤️";
+const NOMBRE="Mi Niña ❤️";
 const FOTO="foto.jpg";
 const MUSICA="cancion.mp3";
-const FECHA_INICIO="2023-12-31";
 
 /* ELEMENTOS */
 const title=document.getElementById("title");
 const photo=document.getElementById("photo");
 const music=document.getElementById("music");
 const loadText=document.getElementById("loadText");
-const tree=document.getElementById("tree");
-const noBtn=document.getElementById("noBtn");
 
-title.innerText=`Te amo mucho, ${NOMBRE_DESTINATARIO}`;
+title.innerText=`Las razones por las que me enamoré de ti, ${NOMBRE}`;
 photo.src=FOTO;
 music.src=MUSICA;
 
-/* AUDIO MÓVIL */
+/* AUDIO */
 document.body.addEventListener("click",()=>{
 music.play().catch(()=>{});
 },{once:true});
 
 /* LOADER */
-const loadLines=[
-"Reuniendo recuerdos…",
-"Sincronizando corazones…",
-"Preparando capítulos…"
+const lines=[
+"Buscando recuerdos bonitos…",
+"Ordenando emociones…",
+"Preparando confesiones…"
 ];
 
 let li=0,ci=0;
 
-function loaderType(){
-if(li<loadLines.length){
-if(ci<loadLines[li].length){
-loadText.innerHTML+=loadLines[li][ci];
+function loader(){
+if(li<lines.length){
+if(ci<lines[li].length){
+loadText.innerHTML+=lines[li][ci];
 ci++;
-setTimeout(loaderType,40);
+setTimeout(loader,40);
 }else{
 loadText.innerHTML+="<br>";
 li++;ci=0;
-setTimeout(loaderType,400);
+setTimeout(loader,400);
 }
-}else setTimeout(()=>next('main'),1000);
+}else setTimeout(()=>go('home'),1000);
 }
-loaderType();
+loader();
 
 /* NAVEGACIÓN */
-function next(id){
+function go(id){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
-
-if(id==="cap3") startTree();
 }
 
-/* CAPÍTULOS */
-function daysSince(date){
-return Math.floor((new Date()-new Date(date))/(1000*60*60*24));
-}
-
-function nextCap(n){
-if(daysSince(FECHA_INICIO)>=n-1){
-next("cap"+n);
-}else{
-alert("Este capítulo aún no se desbloquea ❤️");
-}
-}
-
-/* 🌳 ÁRBOL VIVO */
-const ctx=tree.getContext('2d');
-
-function drawHeart(x,y,size){
-ctx.save();
-ctx.translate(x,y);
-ctx.scale(size,size);
-ctx.beginPath();
-ctx.moveTo(0,0);
-ctx.bezierCurveTo(-10,-10,-20,10,0,20);
-ctx.bezierCurveTo(20,10,10,-10,0,0);
-ctx.fillStyle="#ff4081";
-ctx.fill();
-ctx.restore();
-}
-
-function growBranch(x,y,len,angle,width){
-ctx.beginPath();
-ctx.lineWidth=width;
-ctx.moveTo(x,y);
-
-const x2=x+len*Math.cos(angle);
-const y2=y-len*Math.sin(angle);
-
-ctx.lineTo(x2,y2);
-ctx.stroke();
-
-if(len<8){
-setTimeout(()=>drawHeart(x2,y2,0.3+Math.random()*0.3),200);
-return;
-}
-
-setTimeout(()=>{
-growBranch(x2,y2,len*0.75,angle-0.4,width*0.7);
-growBranch(x2,y2,len*0.75,angle+0.4,width*0.7);
-},200);
-}
-
-function startTree(){
-ctx.clearRect(0,0,tree.width,tree.height);
-growBranch(150,340,80,Math.PI/2,8);
-}
-
-/* PROPUESTA */
-function escapeNo(){
-noBtn.style.top=Math.random()*200-100+"px";
-noBtn.style.left=Math.random()*200-100+"px";
-}
-
-function yes(){
-for(let i=0;i<150;i++){
+/* FINAL */
+function celebrate(){
+for(let i=0;i<130;i++){
 setTimeout(()=>{
 const h=document.createElement("div");
 h.className="heart";
@@ -237,7 +175,7 @@ h.style.left=Math.random()*100+"%";
 document.body.appendChild(h);
 },i*20);
 }
-alert("Nuestra realidad apenas comienza ❤️");
+alert("Gracias por existir ❤️");
 }
 
 </script>
