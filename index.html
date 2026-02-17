@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Por Qué Me Enamoré De Ti ❤️</title>
+<title>Nuestra Historia ✨</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Poppins&display=swap');
 
 body{
 margin:0;
-background:#090612;
+background:linear-gradient(#120018,#2d0b3f);
 color:white;
 font-family:'Poppins',sans-serif;
 overflow:hidden;
@@ -30,40 +30,54 @@ padding:20px;
 
 .active{display:flex;}
 
-button{
-padding:12px 20px;
-border:none;
-border-radius:30px;
-background:#ff5c93;
-color:white;
-margin:10px;
-cursor:pointer;
+h1,h2{
+font-family:'Cinzel',serif;
 }
 
-.photo{
-width:240px;
-border-radius:15px;
+button{
+padding:12px 22px;
+border:none;
+border-radius:30px;
+background:#b57edc;
+color:white;
 margin:15px;
-box-shadow:0 0 20px rgba(255,92,147,0.5);
+cursor:pointer;
+font-size:16px;
+box-shadow:0 0 15px rgba(181,126,220,0.7);
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
 }
 
 .reason{
-max-width:400px;
-margin:10px auto;
+max-width:450px;
+margin:15px auto;
 font-size:18px;
-line-height:1.5;
+line-height:1.6;
 }
 
-.heart{
+.lantern{
 position:fixed;
-bottom:-20px;
-animation:up 6s linear forwards;
-font-size:20px;
+bottom:-40px;
+font-size:24px;
+animation:floatUp 8s linear forwards;
+opacity:0.9;
 }
 
-@keyframes up{
+@keyframes floatUp{
 0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-110vh);opacity:0;}
+100%{transform:translateY(-120vh);opacity:0;}
+}
+
+.magic{
+animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #fff;}
+to{text-shadow:0 0 25px #ffd700;}
 }
 </style>
 </head>
@@ -73,66 +87,71 @@ font-size:20px;
 <audio id="music" loop></audio>
 
 <div id="loader" class="screen active">
-<h1>Recordando por qué me enamoré… ❤️</h1>
+<h1>Había una vez… ✨</h1>
 <p id="loadText"></p>
 </div>
 
 <div id="home" class="screen">
 <h1 id="title"></h1>
-<button onclick="go('r1')">Descubrir ❤️</button>
+<button onclick="go('r1')">Comenzar la historia 👑</button>
 </div>
 
 <div id="r1" class="screen">
-<h2>Tu forma de ser</h2>
-<p class="reason">Me enamoré de tu esencia, de cómo haces que todo se sienta ligero y real, de absolutamente todo lo
-que te hace ser tú, eres una mujer increible prince 💖</p>
-<button onclick="go('r2')">Siguiente</button>
+<h2>La princesa de mi historia</h2>
+<p class="reason">
+No sabía que mi vida necesitaba luz… hasta que llegaste tú.
+Como una princesa que ilumina cada rincón oscuro,
+trajiste magia, paz y propósito a mi mundo.
+</p>
+<button onclick="go('r2')">Siguiente ✨</button>
 </div>
 
 <div id="r2" class="screen">
-<h2>Tu sonrisa</h2>
-<img id="photo" class="photo">
-<p class="reason">Porque tu sonrisa tiene ese poder raro, el de arreglar mis días sin decir nada.
-porque tu simple presencia (que de simple no tiene nada), arregla mi existencia, me demuestra que
-todo esta bien y que eres mi mas grande motivo para seguir adelante</p>
-<button onclick="go('r3')">Siguiente</button>
+<h2>Tu luz</h2>
+<p class="reason">
+Hay algo en ti que brilla diferente.
+Tu sonrisa ilumina más que mil linternas en el cielo,
+y cada vez que me miras siento que encontré mi destino.
+</p>
+<button onclick="go('r3')">Siguiente ✨</button>
 </div>
 
 <div id="r3" class="screen">
-<h2>Cómo me haces sentir</h2>
-<p class="reason">Contigo entendí que la calma también puede latir fuerte y que el amor se construye en detalles pequeños.
-Me haces sentir la persona mas fuerte y poderosa que existe, me transmites un sentimiento de paz y armonia que jamas habia
-experimentado, tu sacas lo mejor de mi 💕</p>
-<button onclick="go('r4')">Siguiente</button>
-</div>
-
-<div id="r4" class="screen">
-<h2>Todo lo que eres</h2>
-<p class="reason">Me enamoré de tu risa, de tu mirada, de tu forma de abrazar, pero sobre todo, de quién soy cuando estoy contigo.
-eres una mujer increible, capaz, enfocada, me haces querer ser mejor 💙</p>
-<button onclick="go('final')">Continuar</button>
+<h2>Nuestro destino</h2>
+<p class="reason">
+Si tuviera que pedir un deseo bajo las luces flotantes,
+sería seguir caminando a tu lado.
+Eres mi aventura favorita,
+mi lugar seguro,
+mi sueño hecho realidad.
+</p>
+<button onclick="go('final')">Continuar 💜</button>
 </div>
 
 <div id="final" class="screen">
-<h1>Y sigo enamorándome de ti cada día ❤️</h1>
-<button onclick="celebrate()">Siempre tú 💖</button>
+<h1 class="magic">Mi princesa… 💍✨</h1>
+<p class="reason">
+Hoy no quiero prometerte un cuento perfecto,
+quiero prometerte algo real.
+Elegirte todos los días.
+Cuidarte.
+Amarte.
+Construir nuestro propio reino juntos.
+</p>
+<button onclick="proposal()">Haz clic aquí 👑</button>
 </div>
 
 <script>
 
 /* PERSONALIZA */
-const NOMBRE="Mi amor 🥰💖";
-const FOTO="foto1.JPG";
-const MUSICA="cancion1.mp3";
+const NOMBRE="Mi Princesa 💜";
+const MUSICA="cancion1.mp3"; // pon aquí una instrumental romántica
 
-/* ELEMENTOS */
 const title=document.getElementById("title");
-const photo=document.getElementById("photo");
 const music=document.getElementById("music");
 const loadText=document.getElementById("loadText");
 
-title.innerText=`Las razones por las que me enamoré de ti, ${NOMBRE}`;
-photo.src=FOTO;
+title.innerText=`Nuestra historia mágica, ${NOMBRE}`;
 music.src=MUSICA;
 
 /* AUDIO */
@@ -142,9 +161,9 @@ music.play().catch(()=>{});
 
 /* LOADER */
 const lines=[
-"Buscando recuerdos bonitos…",
-"Ordenando emociones…",
-"Preparando confesiones…"
+"Reuniendo recuerdos mágicos…",
+"Encendiendo linternas en el cielo…",
+"Preparando una promesa especial…"
 ];
 
 let li=0,ci=0;
@@ -170,23 +189,38 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-/* FINAL */
-function celebrate(){
-for(let i=0;i<130;i++){
+/* PROPUESTA FINAL */
+function proposal(){
+
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+
+const final=document.createElement("div");
+final.className="screen active";
+
+final.innerHTML=`
+<h1 class="magic">Ahora… mi princesa 👑</h1>
+<p class="reason">
+Quiero que vivas este momento como en los cuentos…<br><br>
+Confía en mí.<br><br>
+Da la vuelta lentamente… ✨
+</p>
+`;
+
+document.body.appendChild(final);
+
+/* Linternas flotantes */
+for(let i=0;i<80;i++){
 setTimeout(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerText="❤️";
-h.style.left=Math.random()*100+"%";
-document.body.appendChild(h);
-},i*20);
+const l=document.createElement("div");
+l.className="lantern";
+l.innerText="🏮";
+l.style.left=Math.random()*100+"%";
+document.body.appendChild(l);
+},i*80);
 }
-alert("Gracias por existir ❤️");
+
 }
 
 </script>
 </body>
 </html>
-
-
-
