@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Por Qué Me Enamoré De Ti ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body{
+margin:0;
+background:#090612;
+color:white;
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+}
+
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.active{display:flex;}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:30px;
+background:#ff5c93;
+color:white;
+margin:10px;
+cursor:pointer;
+}
+
+.photo{
+width:240px;
+border-radius:15px;
+margin:15px;
+box-shadow:0 0 20px rgba(255,92,147,0.5);
+}
+
+.reason{
+max-width:400px;
+margin:10px auto;
+font-size:18px;
+line-height:1.5;
+}
+
+.heart{
+position:fixed;
+bottom:-20px;
+animation:up 6s linear forwards;
+font-size:20px;
+}
+
+@keyframes up{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop></audio>
+
+<div id="loader" class="screen active">
+<h1>Recordando por qué me enamoré… ❤️</h1>
+<p id="loadText"></p>
+</div>
+
+<div id="home" class="screen">
+<h1 id="title"></h1>
+<button onclick="go('r1')">Descubrir ❤️</button>
+</div>
+
+<div id="r1" class="screen">
+<h2>Tu forma de ser</h2>
+<p class="reason">Me enamoré de tu esencia, de cómo haces que todo se sienta ligero y real, de absolutamente todo lo
+que te hace ser tú, eres una mujer increible prince 💖</p>
+<button onclick="go('r2')">Siguiente</button>
+</div>
+
+<div id="r2" class="screen">
+<h2>Tu sonrisa</h2>
+<img id="photo" class="photo">
+<p class="reason">Porque tu sonrisa tiene ese poder raro, el de arreglar mis días sin decir nada.
+porque tu simple presencia (que de simple no tiene nada), arregla mi existencia, me demuestra que
+todo esta bien y que eres mi mas grande motivo para seguir adelante</p>
+<button onclick="go('r3')">Siguiente</button>
+</div>
+
+<div id="r3" class="screen">
+<h2>Cómo me haces sentir</h2>
+<p class="reason">Contigo entendí que la calma también puede latir fuerte y que el amor se construye en detalles pequeños.
+Me haces sentir la persona mas fuerte y poderosa que existe, me transmites un sentimiento de paz y armonia que jamas habia
+experimentado, tu sacas lo mejor de mi 💕</p>
+<button onclick="go('r4')">Siguiente</button>
+</div>
+
+<div id="r4" class="screen">
+<h2>Todo lo que eres</h2>
+<p class="reason">Me enamoré de tu risa, de tu mirada, de tu forma de abrazar, pero sobre todo, de quién soy cuando estoy contigo.
+eres una mujer increible, capaz, enfocada, me haces querer ser mejor 💙</p>
+<button onclick="go('final')">Continuar</button>
+</div>
+
+<div id="final" class="screen">
+<h1>Y sigo enamorándome de ti cada día ❤️</h1>
+<button onclick="celebrate()">Siempre tú 💖</button>
+</div>
+
+<script>
+
+/* PERSONALIZA */
+const NOMBRE="Mi amor 🥰💖";
+const FOTO="foto1.JPG";
+const MUSICA="cancion1.mp3";
+
+/* ELEMENTOS */
+const title=document.getElementById("title");
+const photo=document.getElementById("photo");
+const music=document.getElementById("music");
+const loadText=document.getElementById("loadText");
+
+title.innerText=`Las razones por las que me enamoré de ti, ${NOMBRE}`;
+photo.src=FOTO;
+music.src=MUSICA;
+
+/* AUDIO */
+document.body.addEventListener("click",()=>{
+music.play().catch(()=>{});
+},{once:true});
+
+/* LOADER */
+const lines=[
+"Buscando recuerdos bonitos…",
+"Ordenando emociones…",
+"Preparando confesiones…"
+];
+
+let li=0,ci=0;
+
+function loader(){
+if(li<lines.length){
+if(ci<lines[li].length){
+loadText.innerHTML+=lines[li][ci];
+ci++;
+setTimeout(loader,40);
+}else{
+loadText.innerHTML+="<br>";
+li++;ci=0;
+setTimeout(loader,400);
+}
+}else setTimeout(()=>go('home'),1000);
+}
+loader();
+
+/* NAVEGACIÓN */
+function go(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+/* FINAL */
+function celebrate(){
+for(let i=0;i<130;i++){
+setTimeout(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerText="❤️";
+h.style.left=Math.random()*100+"%";
+document.body.appendChild(h);
+},i*20);
+}
+alert("Gracias por existir ❤️");
+}
+
+</script>
+</body>
+</html>
+
+
+
