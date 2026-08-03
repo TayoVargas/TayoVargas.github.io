@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia ✨</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Poppins&display=swap');
+
+body{
+margin:0;
+background:linear-gradient(#120018,#2d0b3f);
+color:pink;
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+}
+
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.active{display:flex;}
+
+h1,h2{
+font-family:'Cinzel',serif;
+}
+
+button{
+padding:12px 22px;
+border:none;
+border-radius:30px;
+background:#b57edc;
+color:white;
+margin:15px;
+cursor:pointer;
+font-size:16px;
+box-shadow:0 0 15px rgba(181,126,220,0.7);
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.reason{
+max-width:450px;
+margin:15px auto;
+font-size:18px;
+line-height:1.6;
+}
+
+.lantern{
+position:fixed;
+bottom:-40px;
+font-size:24px;
+animation:floatUp 8s linear forwards;
+opacity:0.9;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-120vh);opacity:0;}
+}
+
+.magic{
+animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #fff;}
+to{text-shadow:0 0 25px #ffd700;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop></audio>
+
+<div id="loader" class="screen active">
+<h1>Había una vez… ✨</h1>
+<p id="loadText"></p>
+</div>
+
+<div id="home" class="screen">
+<h1 id="title"></h1>
+<button onclick="go('r1')">Comenzar la historia 👑</button>
+</div>
+
+<div id="r1" class="screen">
+<h2>La princesa de mi historia</h2>
+<p class="reason">
+No sabía que mi vida necesitaba luz… hasta que llegaste tú.
+Como una princesa que ilumina cada rincón oscuro,
+trajiste magia, paz y propósito a mi mundo.
+</p>
+<button onclick="go('r2')">Siguiente ✨</button>
+</div>
+
+<div id="r2" class="screen">
+<h2>Tu luz</h2>
+<p class="reason">
+Hay algo en ti que brilla diferente.
+Tu sonrisa ilumina más que mil linternas en el cielo,
+y cada vez que me miras siento que encontré mi destino.
+</p>
+<button onclick="go('r3')">Siguiente ✨</button>
+</div>
+
+<div id="r3" class="screen">
+<h2>Nuestro destino</h2>
+<p class="reason">
+Si tuviera que pedir un deseo bajo las luces flotantes,
+sería seguir caminando a tu lado.
+Eres mi aventura favorita,
+mi lugar seguro,
+mi sueño hecho realidad.
+</p>
+<button onclick="go('final')">Continuar 💜</button>
+</div>
+
+<div id="final" class="screen">
+<h1 class="magic">Mi princesa… 💍✨</h1>
+<p class="reason">
+Hoy no quiero prometerte un cuento perfecto,
+quiero prometerte algo real.
+Elegirte todos los días.
+Cuidarte.
+Amarte.
+Construir nuestro propio reino juntos.
+</p>
+<button onclick="proposal()">Haz clic aquí 👑</button>
+</div>
+
+<script>
+
+/* PERSONALIZA */
+const NOMBRE="Mi Princesa 🥰";
+const MUSICA="cancion2.mp3"; // pon aquí una instrumental romántica
+
+const title=document.getElementById("title");
+const music=document.getElementById("music");
+const loadText=document.getElementById("loadText");
+
+title.innerText=`Nuestra historia mágica, ${NOMBRE}`;
+music.src=MUSICA;
+
+/* AUDIO */
+document.body.addEventListener("click",()=>{
+music.play().catch(()=>{});
+},{once:true});
+
+/* LOADER */
+const lines=[
+"Reuniendo recuerdos mágicos…",
+"Encendiendo linternas en el cielo…",
+"Preparando una promesa especial…"
+];
+
+let li=0,ci=0;
+
+function loader(){
+if(li<lines.length){
+if(ci<lines[li].length){
+loadText.innerHTML+=lines[li][ci];
+ci++;
+setTimeout(loader,40);
+}else{
+loadText.innerHTML+="<br>";
+li++;ci=0;
+setTimeout(loader,400);
+}
+}else setTimeout(()=>go('home'),1000);
+}
+loader();
+
+/* NAVEGACIÓN */
+function go(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+/* PROPUESTA FINAL */
+function proposal(){
+
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+
+const final=document.createElement("div");
+final.className="screen active";
+
+final.innerHTML=`
+<h1 class="magic">Ahora… mi princesa 👑</h1>
+<p class="reason">
+Quiero que vivas este momento como en los cuentos…<br><br>
+Confía en mí.<br><br>
+Da la vuelta lentamente… ✨
+</p>
+`;
+
+document.body.appendChild(final);
+
+/* Linternas flotantes */
+for(let i=0;i<80;i++){
+setTimeout(()=>{
+const l=document.createElement("div");
+l.className="lantern";
+l.innerText="🏮";
+l.style.left=Math.random()*100+"%";
+document.body.appendChild(l);
+},i*80);
+}
+
+}
+
+</script>
+</body>
+</html>
+
+
