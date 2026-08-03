@@ -4,3 +4,26 @@ body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;overflow:h
 .card{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px}
 button{padding:14px 28px;border-radius:30px;border:none}
 .hide{display:none}img{max-width:90%;border-radius:16px}#count{font-size:70px}#flash{position:fixed;inset:0;background:#fff;opacity:0}canvas{position:fixed;inset:0;pointer-events:none}
+#countdown{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:70vh;
+}
+#number{
+font-size:140px;
+font-weight:bold;
+animation:pulse .8s infinite;
+}
+@keyframes pulse{
+0%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.12);
+}
+100%{
+transform:scale(1);
+}
+}
