@@ -1,0 +1,6 @@
+body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;overflow:hidden}
+#stars{position:fixed;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:60px 60px;opacity:.3;animation:move 80s linear infinite}
+@keyframes move{to{background-position:0 -2000px}}
+.card{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px}
+button{padding:14px 28px;border-radius:30px;border:none}
+.hide{display:none}img{max-width:90%;border-radius:16px}#count{font-size:70px}#flash{position:fixed;inset:0;background:#fff;opacity:0}canvas{position:fixed;inset:0;pointer-events:none}
