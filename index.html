@@ -2,72 +2,467 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Te amo ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Te amo ❤️</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#000;
+    color:white;
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+#stars{
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(#fff 1px,transparent 1px);
+    background-size:60px 60px;
+    opacity:.3;
+    animation:move 80s linear infinite;
+}
+
+@keyframes move{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:0 -2000px;
+    }
+}
+
+.card{
+    position:relative;
+    z-index:2;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+#story,
+#reveal{
+    max-width:600px;
+}
+
+h1{
+    font-size:28px;
+}
+
+p{
+    font-size:20px;
+    line-height:1.5;
+}
+
+button{
+    margin-top:25px;
+    padding:15px 35px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.hide{
+    display:none;
+}
+
+img{
+    max-width:90%;
+    border-radius:16px;
+    margin-top:20px;
+}
+
+#flash{
+    position:fixed;
+    inset:0;
+    background:white;
+    opacity:0;
+    z-index:5;
+}
+
+canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:4;
+}
+
+#countdown{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+#number{
+    font-size:140px;
+    font-weight:bold;
+    animation:pulse .8s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+    transform:scale(1);
+}
+
+50%{
+    transform:scale(1.15);
+}
+
+100%{
+    transform:scale(1);
+}
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <div id="stars"></div>
-    <div id="flash"></div>
-    <canvas id="confetti"></canvas>
+<div id="stars"></div>
 
-    <div class="card">
+<div id="flash"></div>
 
-        <!-- Historia -->
-        <div id="story">
+<canvas id="confetti"></canvas>
 
-            <h1>Para la persona que convierte mis días normales en los mejores. ❤️</h1>
 
-            <p id="text"></p>
+<div class="card">
 
-            <button id="btn">Comenzar</button>
+<div id="story">
 
-        </div>
+<h1>
+Para la persona que convierte mis días normales en los mejores. ❤️
+</h1>
 
-        <!-- Sorpresa -->
-        <div id="reveal" class="hide">
+<p id="text"></p>
 
-            <!-- Conteo -->
-            <div id="countdown" class="hide">
+<button id="btn">
+Comenzar
+</button>
 
-                <h2 style="margin-bottom:30px;">
-                    La sorpresa es...
-                </h2>
+</div>
 
-                <div id="number">
-                    3
-                </div>
 
-            </div>
 
-            <!-- Contenido final -->
-            <div id="finalContent" class="hide">
+<div id="reveal" class="hide">
 
-                <h1>NOS VAMOS A VER A HARRY STYLES ❤️</h1>
 
-                <img src="boletos.JPG" alt="Boletos">
+<div id="countdown">
 
-                <p>
-                    Te prometí que haría todo lo posible por cumplir tus sueños.
-                    <br><br>
-                    Gracias por hacerme tan feliz.
-                    <br><br>
-                    Te amo muchísimo mi amor ❤️
-                </p>
+<h2>
+La sorpresa es...
+</h2>
 
-            </div>
+<div id="number">
+3
+</div>
 
-        </div>
+</div>
 
-    </div>
 
-    <audio id="music" src="song.mp3" loop></audio>
 
-    <script src="script.js"></script>
+<div id="finalContent" class="hide">
+
+<h1>
+NOS VAMOS A VER A HARRY STYLES ❤️
+</h1>
+
+<img src="boletos.JPG" alt="Boletos">
+
+
+<p>
+Te prometí que haría todo lo posible por cumplir tus sueños.
+<br><br>
+Te amo mucho mi amor ❤️
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<audio id="music" src="song.mp3" loop></audio>
+
+
+
+<script>
+
+
+const pages=[
+
+"Hay sueños que nunca desaparecen.",
+
+"Sé que One Direction fue parte de una etapa muy especial para ti.",
+
+"Sé que siempre soñaste con verlos en vivo... y ese momento nunca llegó.",
+
+"También recuerdo que te hice una promesa: haría todo lo posible por cumplir tus sueños.",
+
+"No puedo regresar el tiempo ni reunir a One Direction.",
+
+"Pero sí puedo regalarte un pedacito de ese sueño. ❤️"
+
+];
+
+
+let i=-1;
+let start=false;
+
+
+const text=document.getElementById("text");
+const btn=document.getElementById("btn");
+const music=document.getElementById("music");
+
+
+
+function escribir(frase){
+
+text.innerHTML="";
+
+let n=0;
+
+let intervalo=setInterval(()=>{
+
+text.innerHTML=frase.slice(0,n++);
+
+if(n>frase.length){
+
+clearInterval(intervalo);
+
+}
+
+},35);
+
+}
+
+
+
+btn.onclick=async()=>{
+
+
+if(!start){
+
+start=true;
+
+btn.textContent="Continuar";
+
+
+try{
+
+await music.play();
+
+music.volume=0;
+
+let v=0;
+
+let fade=setInterval(()=>{
+
+v+=0.02;
+
+music.volume=Math.min(v,.5);
+
+
+if(v>=.5){
+
+clearInterval(fade);
+
+}
+
+},100);
+
+
+}catch(e){
+
+console.log(e);
+
+}
+
+
+}
+
+
+i++;
+
+
+if(i<pages.length){
+
+escribir(pages[i]);
+
+return;
+
+}
+
+
+
+document.getElementById("story").classList.add("hide");
+
+document.getElementById("reveal").classList.remove("hide");
+
+
+
+let numero=3;
+
+const number=document.getElementById("number");
+
+
+let cuenta=setInterval(()=>{
+
+
+numero--;
+
+
+number.textContent=numero;
+
+
+
+if(numero===0){
+
+
+clearInterval(cuenta);
+
+
+document.getElementById("countdown").classList.add("hide");
+
+document.getElementById("finalContent").classList.remove("hide");
+
+
+flash();
+
+confetti();
+
+
+}
+
+
+},1000);
+
+
+
+};
+
+
+
+
+function flash(){
+
+let f=document.getElementById("flash");
+
+
+f.style.transition="opacity .4s";
+
+f.style.opacity=1;
+
+
+setTimeout(()=>{
+
+f.style.opacity=0;
+
+},400);
+
+
+}
+
+
+
+
+
+function confetti(){
+
+
+const canvas=document.getElementById("confetti");
+
+const ctx=canvas.getContext("2d");
+
+
+canvas.width=innerWidth;
+
+canvas.height=innerHeight;
+
+
+
+let piezas=[...Array(180)].map(()=>({
+
+
+x:Math.random()*canvas.width,
+
+y:-20,
+
+r:2+Math.random()*5,
+
+dx:(Math.random()-.5)*4,
+
+dy:2+Math.random()*5
+
+
+}));
+
+
+
+function animar(){
+
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+
+piezas.forEach(p=>{
+
+
+ctx.beginPath();
+
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+
+ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+
+ctx.fill();
+
+
+
+p.x+=p.dx;
+
+p.y+=p.dy;
+
+
+
+});
+
+
+
+requestAnimationFrame(animar);
+
+
+}
+
+
+animar();
+
+
+}
+
+
+
+</script>
+
 
 </body>
 
